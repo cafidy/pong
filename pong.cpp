@@ -8,31 +8,9 @@ using namespace std;
 int main() {
   //Initialisation Début ############################################################################
   // Initialisation de GLFW
-  if (!glfwInit()) {
-      cerr << "Échec de l'initialisation de GLFW" << endl;
-      return -1;
-  }
-  // Configuration de GLFW pour utiliser le profil OpenGL Core
-  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-  glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-  glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-  // Création d'une fenêtre GLFW
-  GLFWwindow* window = glfwCreateWindow(1000.0f, 500.0f, "Bibibop engine", nullptr, nullptr);
-  if (!window) {
-      cerr << "Échec de la création de la fenêtre GLFW" << endl;
-      glfwTerminate();
-      return -1;
-  }
-  // Définition de la fenêtre comme le contexte OpenGL courant
-  glfwMakeContextCurrent(window);
-  // Initialisation de GLEW
-  glewExperimental = GL_TRUE;
-  if (glewInit() != GLEW_OK) {
-      cerr << "Échec de l'initialisation de GLEW" << endl;
-      glfwTerminate();
-      return -1;
-  }
+  GLFWwindow * window;
+    //initialisation de la lib
+  bbopInit(1920,1080,"window name",window);
   // Désactiver la synchronisation verticale (V-Sync)
   //glfwSwapInterval(0);
   //General info
@@ -204,7 +182,7 @@ int main() {
 	// Delete window before ending the program
 	glfwDestroyWindow(window);
   // Terminate GLFW before ending the program
-  defaultScene.Delete();
+  
   cout << "Session terminated, avg fps: " << totalFps/glfwGetTime() << endl;
 	glfwTerminate();
 	return 0;
